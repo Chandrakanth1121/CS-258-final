@@ -1,0 +1,14 @@
+Intrusion-replication report:
+Dataset : nsl
+Task    : binary
+Model   : svm
+
+accuracy : 0.9737
+precision: 0.9738
+recall   : 0.9737
+f1       : 0.9737
+roc_auc  : 0.9958
+
+Confusion matrix:
+[[15156  255]
+ [ 527 13766]]

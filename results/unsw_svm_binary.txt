@@ -1,0 +1,14 @@
+Intrusion-replication report:
+Dataset : unsw
+Task    : binary
+Model   : svm
+
+accuracy : 0.9293
+precision: 0.9292
+recall   : 0.9293
+f1       : 0.9289
+roc_auc  : 0.9841
+
+Confusion matrix:
+[[16322 2278]
+ [1364 31571]]

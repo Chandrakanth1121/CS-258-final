@@ -1,0 +1,17 @@
+Intrusion-replication report:
+Dataset : nsl
+Task    : multiclass
+Model   : dt
+
+accuracy : 0.9750
+precision: 0.9731
+recall   : 0.9750
+f1       : 0.9728
+roc_auc  : nan
+
+Confusion matrix:
+[[10453   52   12   13    0]
+ [  63 15277   26  45    0]
+ [  35  79  1828    0    0]
+ [   3  364    0  382    0]
+ [   0   19    0    5    0]]

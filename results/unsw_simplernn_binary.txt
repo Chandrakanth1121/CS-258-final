@@ -1,0 +1,14 @@
+Intrusion-replication report:
+Dataset : unsw
+Task    : binary
+Model   : simplernn
+
+accuracy : 0.9303
+precision: 0.9310
+recall   : 0.9303
+f1       : 0.9306
+roc_auc  : 0.9847
+
+Confusion matrix:
+[[17078 1522]
+ [2068 30867]]

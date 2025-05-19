@@ -1,0 +1,14 @@
+Intrusion-replication report:
+Dataset : nsl
+Task    : binary
+Model   : knn
+
+accuracy : 0.9733
+precision: 0.9734
+recall   : 0.9733
+f1       : 0.9733
+roc_auc  : 0.9974
+
+Confusion matrix:
+[[15139  272]
+ [ 522 13771]]

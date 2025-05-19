@@ -1,0 +1,50 @@
+a634d4f5fa9992d9beec3d9c02b541d681cdbbe4
+
+ec865dd8cce38b300caa7e849cd68531a9ed82cfaa90cbe6
+
+wget --header "Auth-Key: ec865dd8cce38b300caa7e849cd68531a9ed82cfaa90cbe6" --post-data "query=get_file&sha256_hash=49ace861126dea98811a915729d0215584cd11bc30d3b8c0353be646f2668285" -O 49ace861126dea98811a915729d0215584cd11bc30d3b8c0353be646f2668285.zip https://mb-api.abuse.ch/api/v1/
+
+7z x 49ace861126dea98811a915729d0215584cd11bc30d3b8c0353be646f2668285.zip
+
+objdump --target=pei-x86-64 -d 49ace861126dea98811a915729d0215584cd11bc30d3b8c0353be646f2668285.exe > 49ace861126dea98811a915729d0215584cd11bc30d3b8c0353be646f2668285.asm
+
+mkdir -p asm && for f in *.exe; do t=$(file -b "$f" | grep -q 'PE32+' && echo pei-x86-64 || echo pei-i386); objdump --target="$t" -d "$f" > asm/"${f%.exe}.asm" && rm -- "$f"; done
+
+54.193.83.243
+
+#!/usr/bin/env bash
+# loopfile.sh – download & unzip every hash in a list, retrying on errors
+
+set -euo pipefail
+
+FILE=${1:?need hash-list}
+API_KEY="ec865dd8cce38b300caa7e849cd68531a9ed82cfaa90cbe6"   # <-- your MB key
+
+while IFS= read -r line || [[ -n $line ]]; do
+    line=${line#"${line%%[![:space:]]*}"}    # ltrim
+    line=${line%"${line##*[![:space:]]}"}    # rtrim
+    [[ -z $line || $line =~ ^# ]] && continue
+
+    zipfile="$line.zip"
+    max=5 delay=1
+    for (( try=1; try<=max; try++ )); do
+        echo "[$try/$max] GET $line"
+        wget --header "AUTH-KEY: $API_KEY" \
+             --post-data "query=get_file&sha256_hash=$line" \
+             -O "$zipfile" \
+             https://mb-api.abuse.ch/api/v1/ \
+             && break                               # success → leave retry loop
+        echo "   failed (wget exit $?), retrying in $delay s…" >&2
+        rm -f "$zipfile"                           # clean bad/partial download
+        sleep "$delay"
+        delay=$(( delay * 2 ))                     # exponential back-off
+    done
+
+    if [[ ! -s $zipfile ]]; then
+        echo "!! giving up on $line after $max tries" >&2
+        continue
+    fi
+
+    7z x "$zipfile" -pinfected
+    rm -f "$zipfile"
+done < "$FILE"

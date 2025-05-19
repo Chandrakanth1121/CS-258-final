@@ -1,0 +1,14 @@
+Intrusion-replication report:
+Dataset : nsl
+Task    : binary
+Model   : lstm
+
+accuracy : 0.9846
+precision: 0.9847
+recall   : 0.9846
+f1       : 0.9846
+roc_auc  : 0.9986
+
+Confusion matrix:
+[[15246  165]
+ [ 291 14002]]

@@ -2,7 +2,7 @@
 
 Reproduce the results of:
 - Kasongo & Sun (2020) “Deep‐RNN framework for network intrusion detection”
-- Kilinçer et al. (2021) “Machine-learning-based intrusion-detection benchmark”
+- Kilincer et al. (2021) “Machine-learning-based intrusion-detection benchmark”
 
 on the NSL-KDD and UNSW-NB15 datasets, then export a tidy text report with one command.
 
